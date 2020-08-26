@@ -1,4 +1,15 @@
-/* resets */
+/*
+            =======
+            IMPORTS
+            =======
+*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/*
+            ============
+            STYLE RESETS
+            ============
+*/
 * {
     padding: 0;
     margin: 0;
@@ -14,25 +25,128 @@ html {
     box-sizing: border-box;
 }
 
-body {
-    background: slateblue;
-}
-
 /*
-    ====
-    MENU
-    ====
+            ===============
+            PAGE BACKGROUND
+            ===============
 */
-.project-list {
-    display: none;
+body {
+    background: linear-gradient(146.38deg, #8EC5FC 15.9%, #E0C3FC 85.26%);
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /*
-    ===============
-    NEW TASK BUTTON
-    ===============
+            ================
+            TODO LIST STYLES
+            ================
+*/
+.todo-list {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background: #FFFFFF;
+    box-sizing: border-box;
+
+    border: 1px solid rgba(0, 0, 0, .5);
+    border-radius: 20px;
+
+    box-shadow: 9px 13px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Montserrat', sans-serif;
+
+    overflow: hidden;
+}
+
+/*
+            =============
+            HEADER STYLES
+            =============
+*/
+.header {
+
+    display: flex;
+    align-items: center;
+
+    height: 200px;
+
+    background-color: #306294;
+}
+
+/*
+    HAMBURGER MENU
+    ==============
+*/
+.menu {
+    justify-self: flex-start;
+
+    margin: 1rem;
+}
+
+.project-list {
+
+    display: none;
+    position: absolute;
+
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 10px;
+
+    max-height: 300px;
+
+    overflow: auto;
+}
+
+.project-item {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.1);
+
+    padding: 0.4rem 0 0.4rem 1rem;
+}
+
+/*
+    ===========
+    HEADER TEXT
+    ===========
+*/
+.project-name {
+
+    color: #fff;
+    font-size: 45px;
+    letter-spacing: .05rem;
+
+    margin: 0 6rem;
+}
+
+/*
+    ==================
+    NEW PROJECT BUTTON
+    ==================
+*/
+.new-project-button {
+
+    justify-self: flex-end;
+
+    margin: 2rem;
+}
+
+
+/*
+            ======================
+            ADD TASK BUTTON STYLES
+            ======================
 */
 .new-task-button {
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,74 +154,81 @@ body {
     border-radius: 50%;
     background: rgb(1, 192, 64);
 
-    width: 2rem;
-    height: 2rem;
+    width: 3.5rem;
+    height: 3.5rem;
 
     color: #fff;
     font-weight: 900;
     font-size: 30px;
+
+    margin: 1rem;
 }
 
 /*
-    =====
-    ICONS
-    =====
+            ================
+            TASK LIST STYLES
+            ================
 */
-.menu-icon {
-    transform: scale(.45);
-    padding: 5px;
-}
+.task-list {
 
-.delete-icon {
-    transform: scale(.18);
-}
+    width: 100%;
+    max-height: 350px;
 
-.new-project-icon {
-    transform: scale(.07);
-}
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
 
-.checkmark-icon {
-    transform: scale(.3);
+    overflow: auto;
 }
 
 /*
-    ======
-    HOVERS
-    ======
+            ===========
+            TASK STYLES
+            ===========
 */
-.menu-icon:hover {
-    cursor: pointer;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.15);
+.task {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: rgba(195, 231, 252, 0.34);
+    border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-.delete-icon:hover {
-    cursor: pointer;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.15);
+.task-title {
+
+    font-weight: bold;
+    font-size: 27px;
+
+    margin: 0 3rem;
 }
 
-.new-project-icon:hover {
-    cursor: pointer;
+.task-due-date {
+
+    font-size: 22px;
 }
 
-.new-task-button:hover {
-    cursor: pointer;
-    background: rgb(0, 255, 85);
+.checkmark-button {
+
+    margin: 0.5rem 1rem;
 }
 
-.checkmark-icon:hover {
-    cursor: pointer;
+.task[data-priority="high"] {
+    background: rgba(255, 77, 0, 0.34);
+}
+
+.task[data-priority="medium"] {
+    background: rgba(252, 255, 102, 0.34);
 }
 
 /*
-    ======
-    MODALS
-    ======
+            ============
+            MODAL STYLES
+            ============
 */
 .new-project-modal-overlay,
 .new-task-modal-overlay,
 .task-details-modal-overlay {
+
     display: none;
 
     position: fixed;
@@ -120,10 +241,125 @@ body {
     background: rgba(0, 0, 0, 0.5);
 }
 
-.modal {
+.new-project-modal,
+.new-task-modal,
+.task-details-modal {
+
+    display: inline-block;
+
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     background: #fff;
-    border: 1px solid #000;
+    border: 1px solid rgba(0,0,0,0.3);
     border-radius: 15px;
 
-    padding: 3rem;
+    font-family: 'Montserrat', sans-serif;
+
+    margin: 2rem;
+    padding: 2rem;
+}
+
+form {
+
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+
+    margin: .3rem;
+}
+
+input {
+
+    margin-bottom: 1rem;
+}
+
+/*
+            ===========
+            ICON STYLES
+            ===========
+*/
+.menu-icon {
+    transform: scale(.6);
+    padding: 5px;
+}
+
+.delete-icon {
+    transform: scale(.4);
+}
+
+.new-project-icon {
+    transform: scale(.4);
+}
+
+.checkmark-icon {
+    transform: scale(.5);
+}
+
+/*
+            ============
+            HOVER STYLES
+            ============
+*/
+.menu-icon:hover {
+    cursor: pointer;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.delete-icon:hover {
+    cursor: pointer;
+}
+
+.project-name {
+    cursor: default;
+}
+
+.new-project-button:hover {
+    cursor: pointer;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.project-item:hover {
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.new-task-button:hover {
+    cursor: pointer;
+    background: rgb(0, 255, 85);
+}
+
+.task:hover {
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.checkmark-button:hover {
+    cursor: pointer;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+/*
+            =============
+            BUTTON STYLES
+            =============
+*/
+button {
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+
+    width: 75px;
+
+    margin: .5rem;
+    padding: .3rem .6rem;
+
+    align-self: center;
 }

@@ -4,13 +4,17 @@ import { populateProjectList } from '../menu/menu';
 
 const createNewProjectButton = () => {
 
+    // create wrapper dom
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('new-project-button');
+
     // create img dom
     const img = document.createElement('img');
     img.classList.add('new-project-icon');
     img.setAttribute('src', './images/new-project-icon.svg');
 
     // add click event
-    img.addEventListener('click', () => {
+    wrapper.addEventListener('click', () => {
 
         // check for null overlay
         if (!document.querySelector('.new-project-modal-overlay')) {
@@ -21,7 +25,9 @@ const createNewProjectButton = () => {
         toggleNewProjectModal();
     });
 
-    return img
+    wrapper.appendChild(img);
+
+    return wrapper;
 };
 
 const toggleNewProjectModal = () => {
@@ -79,16 +85,18 @@ const createNewProjectModalForm = () => {
     const projectNameInput = document.createElement('input');
     projectNameInput.classList.add('input-project-name');
     projectNameInput.setAttribute('id', 'input-project-name');
+    projectNameInput.setAttribute('autocomplete', 'off');
+    projectNameInput.autofocus = true;
 
     // create submit button
     const submitButton = document.createElement('button');
     submitButton.classList.add('button-add-project');
-    submitButton.textContent = 'Add';
+    submitButton.textContent = 'add';
 
     // create cancel button
     const cancelButton = document.createElement('button');
     cancelButton.classList.add('button-cancel-project');
-    cancelButton.textContent = 'Cancel';
+    cancelButton.textContent = 'cancel';
 
     // submit click event
     submitButton.addEventListener('click', e => {

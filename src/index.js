@@ -3,17 +3,21 @@ import { createTodoList } from './todoList/todoList';
 import { Project } from './objects/project';
 import { Task } from './objects/task';
 
-// test project: Default
-const p1 = Project('Default');
-const t1 = Task('Buy new clothes', 'Hat, T-shirt, Jeans', '25-08-2020', 'high');
-p1.tasks.push(t1);
-localStorage.setItem(p1.name, JSON.stringify(p1));
+// get default project
+const defaultProject = JSON.parse(localStorage.getItem('Default'));
 
-// test project: Groceries
-const p2 = Project('Groceries');
-const t2 = Task('Buy Bread', 'Whole Wheat', '25-08-2020', 'high');
-p2.tasks.push(t2);
-localStorage.setItem(p2.name, JSON.stringify(p2));
+// null check
+if(!defaultProject) {
+
+    // create a new default project
+    const newDefaultProject = Project('Default');
+
+    // create a sample task
+    const sampleTask = Task('Sample Task', 'A detailed description of the sample task', '01-09-2020', 'low');
+    newDefaultProject.tasks.push(sampleTask);
+
+    localStorage.setItem(newDefaultProject.name, JSON.stringify(newDefaultProject));
+}
 
 // start todo list app
 const todoList = createTodoList();

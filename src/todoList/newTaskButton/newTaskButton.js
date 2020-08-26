@@ -67,6 +67,7 @@ const createNewTaskModalForm = () => {
     // create form
     const form = document.createElement('form');
     form.classList.add('new-task-form');
+    form.setAttribute('autocomplete', 'off');
 
     // create task title dom
     const taskTitleLabel = document.createElement('label');
@@ -111,12 +112,12 @@ const createNewTaskModalForm = () => {
     // create submit button
     const submitButton = document.createElement('button');
     submitButton.classList.add('button-add-task');
-    submitButton.textContent = 'Add';
+    submitButton.textContent = 'add';
 
     // create cancel button
     const cancelButton = document.createElement('button');
     cancelButton.classList.add('button-cancel-task');
-    cancelButton.textContent = 'Cancel';
+    cancelButton.textContent = 'cancel';
 
     // submit click event
     submitButton.addEventListener('click', e => {

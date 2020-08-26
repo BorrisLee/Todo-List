@@ -38,12 +38,15 @@ const createTaskList = projectName => {
         taskDueDate.textContent = task.due;
 
         // create checkmark dom
+        const checkmarkWrapper = document.createElement('div');
+        checkmarkWrapper.classList.add('checkmark-button');
+
         const checkmark = document.createElement('img');
         checkmark.setAttribute('src', './images/checkmark-icon.svg');
         checkmark.classList.add('checkmark-icon');
 
         // add checkmark click event
-        checkmark.addEventListener('click', e => {
+        checkmarkWrapper.addEventListener('click', e => {
 
             // stop details modal from popping up
             e.stopPropagation();
@@ -54,6 +57,9 @@ const createTaskList = projectName => {
             // refresh task list
             refreshTaskList();
         });
+
+        // set task dom colour
+        listItem.setAttribute('data-priority', task.priority);
 
         // add list item click event
         listItem.addEventListener('click', () => {
@@ -77,9 +83,12 @@ const createTaskList = projectName => {
         });
 
         // append to list item
+        checkmarkWrapper.appendChild(checkmark);
+
         listItem.appendChild(taskTitle);
         listItem.appendChild(taskDueDate);
-        listItem.appendChild(checkmark);
+        listItem.appendChild(checkmarkWrapper);
+
         taskList.appendChild(listItem);
     });
 
@@ -115,6 +124,10 @@ const createTaskDetailsModal = task => {
     const wrapper = document.createElement('div');
     wrapper.classList.add('task-details-modal');
 
+    // create form
+    const form = document.createElement('form');
+    form.setAttribute('autocomplete', 'off');
+
     // create task title dom
     const taskTitleLabel = document.createElement('label');
     taskTitleLabel.textContent = 'Task Name:';
@@ -148,14 +161,16 @@ const createTaskDetailsModal = task => {
     taskPriorityInput.value = task.priority;
 
     // append content to modal
-    wrapper.appendChild(taskTitleLabel);
-    wrapper.appendChild(taskTitleInput);
-    wrapper.appendChild(taskDescriptionLabel);
-    wrapper.appendChild(taskDescriptionInput);
-    wrapper.appendChild(taskDueDateLabel);
-    wrapper.appendChild(taskDueDateInput);
-    wrapper.appendChild(taskPriorityLabel);
-    wrapper.appendChild(taskPriorityInput);
+    wrapper.appendChild(form);
+
+    form.appendChild(taskTitleLabel);
+    form.appendChild(taskTitleInput);
+    form.appendChild(taskDescriptionLabel);
+    form.appendChild(taskDescriptionInput);
+    form.appendChild(taskDueDateLabel);
+    form.appendChild(taskDueDateInput);
+    form.appendChild(taskPriorityLabel);
+    form.appendChild(taskPriorityInput);
 
     // append modal to overlay
     overlay.appendChild(wrapper);
